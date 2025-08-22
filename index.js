@@ -34,7 +34,7 @@ app.post("/sendMail", async (req, res) => {
     }
 
     try {
-        // ✅ Setup transporter (using Gmail with App Password)
+        // ✅ Setup transporter (using Gmail with App Password)??
         const transporter = nodemailer.createTransport({
             service: "gmail",
             auth: {
