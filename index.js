@@ -11,44 +11,44 @@ const PORT = process.env.PORT || 5000;
 
 // ✅ Middleware
 app.use(
-    cors({
-        origin: "http://localhost:5173", // allow your React frontend
-        methods: ["GET", "POST"],
-        allowedHeaders: ["Content-Type"],
-    })
+  cors({
+    origin: ["http://localhost:5173", "https://celebindiavision.com"], // allow your React frontend
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type"],
+  })
 );
 app.use(bodyParser.json());
 
 // ✅ Health check route
 app.get("/", (req, res) => {
-    res.send("🚀 Contact API is running");
+  res.send("🚀 Contact API is running");
 });
 
 // 📩 Contact API Route
 app.post("/sendMail", async (req, res) => {
-    const { name, email, mobile, comments } = req.body;
+  const { name, email, mobile, comments } = req.body;
 
-    // Validation
-    if (!name || !email || !mobile || !comments) {
-        return res.status(400).json({ success: false, message: "All fields are required!" });
-    }
+  // Validation
+  if (!name || !email || !mobile || !comments) {
+    return res.status(400).json({ success: false, message: "All fields are required!" });
+  }
 
-    try {
-        // ✅ Setup transporter (using Gmail with App Password)??
-        const transporter = nodemailer.createTransport({
-            service: "gmail",
-            auth: {
-                user: process.env.MAIL_USER, // Your Gmail
-                pass: process.env.MAIL_PASS, // Your App Password
-            },
-        });
+  try {
+    // ✅ Setup transporter (using Gmail with App Password)??
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.MAIL_USER, // Your Gmail
+        pass: process.env.MAIL_PASS, // Your App Password
+      },
+    });
 
-        // ✅ Email details
-        const mailOptions = {
-            from: `"CelebIndiaVision Contact" <${process.env.MAIL_USER}>`,
-            to: process.env.MAIL_TO || process.env.MAIL_USER,
-            subject: "📩 New Contact Form Submission - CelebIndiaVision",
-            html: `
+    // ✅ Email details
+    const mailOptions = {
+      from: `"CelebIndiaVision Contact" <${process.env.MAIL_USER}>`,
+      to: process.env.MAIL_TO || process.env.MAIL_USER,
+      subject: "📩 New Contact Form Submission - CelebIndiaVision",
+      html: `
     <div style="font-family: Arial, sans-serif; background: #f9f9f9; padding: 20px;">
       <table width="100%" border="0" cellspacing="0" cellpadding="0" 
              style="max-width: 600px; margin: auto; background: #ffffff; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.05);">
@@ -75,20 +75,20 @@ app.post("/sendMail", async (req, res) => {
       </table>
     </div>
   `,
-        };
+    };
 
 
-        // ✅ Send email
-        await transporter.sendMail(mailOptions);
+    // ✅ Send email
+    await transporter.sendMail(mailOptions);
 
-        res.json({ success: true, message: "Message sent successfully ✅" });
-    } catch (error) {
-        console.error("❌ Error sending email:", error);
-        res.status(500).json({ success: false, message: "Failed to send message" });
-    }
+    res.json({ success: true, message: "Message sent successfully ✅" });
+  } catch (error) {
+    console.error("❌ Error sending email:", error);
+    res.status(500).json({ success: false, message: "Failed to send message" });
+  }
 });
 
 // ✅ Start server
 app.listen(PORT, () => {
-    console.log(`🚀 Server running on http://localhost:${PORT}`);
+  console.log(`🚀 Server running on http://localhost:${PORT}`);
 });
