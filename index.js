@@ -105,7 +105,7 @@ const PORT = process.env.PORT || 5000;
 // ✅ Middleware
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://celebindiavision.com"], // your React frontend(s)
+    origin: ["http://localhost:3000", "https://eliteforgefitness.com"], // your React frontend(s)
     methods: ["GET", "POST"],
     allowedHeaders: ["Content-Type"],
   })
