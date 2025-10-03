@@ -139,11 +139,20 @@ app.get("/", (req, res) => {
 });
 
 // Nodemailer transporter
+// const transporter = nodemailer.createTransport({
+//   service: "gmail",
+//   auth: {
+//     user: process.env.MAIL_USER,
+//     pass: process.env.MAIL_PASS, // App password
+//   },
+// });
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  host: "smtp.gmail.com",
+  port: 465, // SSL
+  secure: true,
   auth: {
     user: process.env.MAIL_USER,
-    pass: process.env.MAIL_PASS, // App password
+    pass: process.env.MAIL_PASS,
   },
 });
 
