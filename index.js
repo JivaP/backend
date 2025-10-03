@@ -154,14 +154,14 @@ app.post("/sendMail", async (req, res) => {
     const mailOptions = {
       from: `"CelebIndiaVision Contact" <${process.env.MAIL_USER}>`,
       to: process.env.MAIL_TO || process.env.MAIL_USER,
-      subject: "📩 New Contact Form Submission - CelebIndiaVision",
+      subject: "📩 New Contact Form Submission - Elite Forge",
       html: `
       <div style="font-family: Arial, sans-serif; background: #f9f9f9; padding: 20px;">
         <table width="100%" border="0" cellspacing="0" cellpadding="0" 
               style="max-width: 600px; margin: auto; background: #ffffff; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.05);">
           <tr>
             <td style="background: #111; color: #fff; text-align: center; padding: 20px;">
-              <h1 style="margin: 0; font-size: 22px;">CelebIndiaVision</h1>
+              <h1 style="margin: 0; font-size: 22px;">Elite Forge</h1>
               <p style="margin: 5px 0 0; font-size: 14px;">New Contact Form Submission</p>
             </td>
           </tr>
@@ -176,7 +176,7 @@ app.post("/sendMail", async (req, res) => {
           </tr>
           <tr>
             <td style="background: #f1f1f1; text-align: center; padding: 15px; font-size: 12px; color: #555;">
-              © ${new Date().getFullYear()} CelebIndiaVision. All rights reserved.
+              © ${new Date().getFullYear()} Elite Forge. All rights reserved.
             </td>
           </tr>
         </table>
