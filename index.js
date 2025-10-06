@@ -32,14 +32,15 @@ app.get("/", (req, res) => {
 //   },
 // });
 const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 465, // SSL
-  secure: true,
+  host: "smtp.hostinger.com", // ✅ Hostinger SMTP server
+  port: 465,                  // or 587 if 465 doesn’t work
+  secure: true,               // true for 465, false for 587
   auth: {
-    user: process.env.MAIL_USER,
-    pass: process.env.MAIL_PASS,
+    user: process.env.MAIL_USER, // your full Hostinger email
+    pass: process.env.MAIL_PASS, // your Hostinger email password
   },
 });
+
 
 // Verify transporter
 transporter.verify((err, success) => {
